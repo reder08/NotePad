@@ -53,7 +53,7 @@
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "存檔";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // rtbText
             // 
@@ -62,7 +62,6 @@
             this.rtbText.Size = new System.Drawing.Size(767, 378);
             this.rtbText.TabIndex = 2;
             this.rtbText.Text = "";
-            this.rtbText.TextChanged += new System.EventHandler(this.rtbText_TextChanged);
             // 
             // openFileDialog1
             // 

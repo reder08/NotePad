@@ -11,7 +11,7 @@ using System.IO;
 
 namespace NotePad
 {
-    public partial class Form1: Form
+    public partial class Form1 : Form
     {
         public Form1()
         {
@@ -79,6 +79,7 @@ namespace NotePad
                 MessageBox.Show("使用者取消了選擇檔案操作。", "訊息", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
             }
         }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             // 設置對話方塊標題
@@ -138,15 +139,6 @@ namespace NotePad
             {
                 MessageBox.Show("使用者取消了儲存檔案操作。", "訊息", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             }
-        }
-        private void rtbText_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSave_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

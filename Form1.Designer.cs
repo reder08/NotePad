@@ -78,6 +78,7 @@
             this.btnUndo.TabIndex = 3;
             this.btnUndo.Text = "上一步";
             this.btnUndo.UseVisualStyleBackColor = true;
+            this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
             // 
             // listUndo
             // 

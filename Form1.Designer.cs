@@ -35,11 +35,15 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.btnUndo = new System.Windows.Forms.Button();
             this.listUndo = new System.Windows.Forms.ListBox();
+            this.btnRedo = new System.Windows.Forms.Button();
+            this.comboBoxFont = new System.Windows.Forms.ComboBox();
+            this.comboBoxStyle = new System.Windows.Forms.ComboBox();
+            this.comboBoxSize = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(12, 12);
+            this.btnOpen.Location = new System.Drawing.Point(550, 60);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(101, 42);
             this.btnOpen.TabIndex = 0;
@@ -49,7 +53,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(119, 12);
+            this.btnSave.Location = new System.Drawing.Point(550, 117);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(101, 42);
             this.btnSave.TabIndex = 1;
@@ -72,7 +76,7 @@
             // 
             // btnUndo
             // 
-            this.btnUndo.Location = new System.Drawing.Point(226, 12);
+            this.btnUndo.Location = new System.Drawing.Point(667, 60);
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.Size = new System.Drawing.Size(101, 42);
             this.btnUndo.TabIndex = 3;
@@ -84,16 +88,54 @@
             // 
             this.listUndo.FormattingEnabled = true;
             this.listUndo.ItemHeight = 15;
-            this.listUndo.Location = new System.Drawing.Point(541, 60);
+            this.listUndo.Location = new System.Drawing.Point(541, 180);
             this.listUndo.Name = "listUndo";
-            this.listUndo.Size = new System.Drawing.Size(247, 379);
+            this.listUndo.Size = new System.Drawing.Size(247, 259);
             this.listUndo.TabIndex = 4;
+            // 
+            // btnRedo
+            // 
+            this.btnRedo.Location = new System.Drawing.Point(667, 117);
+            this.btnRedo.Name = "btnRedo";
+            this.btnRedo.Size = new System.Drawing.Size(101, 42);
+            this.btnRedo.TabIndex = 5;
+            this.btnRedo.Text = "下一步";
+            this.btnRedo.UseVisualStyleBackColor = true;
+            this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click_1);
+            // 
+            // comboBoxFont
+            // 
+            this.comboBoxFont.FormattingEnabled = true;
+            this.comboBoxFont.Location = new System.Drawing.Point(12, 22);
+            this.comboBoxFont.Name = "comboBoxFont";
+            this.comboBoxFont.Size = new System.Drawing.Size(179, 23);
+            this.comboBoxFont.TabIndex = 6;
+            // 
+            // comboBoxStyle
+            // 
+            this.comboBoxStyle.FormattingEnabled = true;
+            this.comboBoxStyle.Location = new System.Drawing.Point(380, 22);
+            this.comboBoxStyle.Name = "comboBoxStyle";
+            this.comboBoxStyle.Size = new System.Drawing.Size(155, 23);
+            this.comboBoxStyle.TabIndex = 7;
+            // 
+            // comboBoxSize
+            // 
+            this.comboBoxSize.FormattingEnabled = true;
+            this.comboBoxSize.Location = new System.Drawing.Point(197, 22);
+            this.comboBoxSize.Name = "comboBoxSize";
+            this.comboBoxSize.Size = new System.Drawing.Size(177, 23);
+            this.comboBoxSize.TabIndex = 8;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.comboBoxSize);
+            this.Controls.Add(this.comboBoxStyle);
+            this.Controls.Add(this.comboBoxFont);
+            this.Controls.Add(this.btnRedo);
             this.Controls.Add(this.listUndo);
             this.Controls.Add(this.btnUndo);
             this.Controls.Add(this.rtbText);
@@ -114,6 +156,10 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button btnUndo;
         private System.Windows.Forms.ListBox listUndo;
+        private System.Windows.Forms.Button btnRedo;
+        private System.Windows.Forms.ComboBox comboBoxFont;
+        private System.Windows.Forms.ComboBox comboBoxStyle;
+        private System.Windows.Forms.ComboBox comboBoxSize;
     }
 }
 

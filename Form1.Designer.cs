@@ -101,7 +101,7 @@
             this.btnRedo.TabIndex = 5;
             this.btnRedo.Text = "下一步";
             this.btnRedo.UseVisualStyleBackColor = true;
-            this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click_1);
+            this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click);
             // 
             // comboBoxFont
             // 

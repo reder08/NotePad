@@ -31,23 +31,6 @@ namespace NotePad
         private int selectionStart = 0;                            // 記錄文字反白的起點
         private int selectionLength = 0;                           // 記錄文字反白的長度
 
-        private void SaveCurrentStateToStack()
-        {
-            // 創建一個新的 MemoryStream 來保存文字編輯狀態
-            MemoryStream memoryStream = new MemoryStream();
-            // 將 RichTextBox 的內容保存到 memoryStream
-            rtbText.SaveFile(memoryStream, RichTextBoxStreamType.RichText);
-            // 將 memoryStream 放入回復堆疊
-            undoStack.Push(memoryStream);
-        }
-        // 將文字狀態從記憶體中顯示到 RichTextBox
-        private void LoadFromMemory(MemoryStream memoryStream)
-        {
-            // 將 memoryStream 的指標重置到開始位置
-            memoryStream.Seek(0, SeekOrigin.Begin);
-            // 將 memoryStream 的內容放到到 RichTextBox
-            rtbText.LoadFile(memoryStream, RichTextBoxStreamType.RichText);
-        }
         private void btnOpen_Click(object sender, EventArgs e)
         {
             // 設置對話方塊標題
@@ -94,7 +77,6 @@ namespace NotePad
                         // 如果是RTF文件，使用RichTextBox的LoadFile方法
                         rtbText.LoadFile(selectedFileName, RichTextBoxStreamType.RichText);
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -107,6 +89,7 @@ namespace NotePad
                 MessageBox.Show("使用者取消了選擇檔案操作。", "訊息", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
             }
         }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             // 設置對話方塊標題
@@ -181,6 +164,18 @@ namespace NotePad
             }
         }
 
+        private void btnRedo_Click(object sender, EventArgs e)
+        {
+            if (redoStack.Count > 0)
+            {
+                isUndoRedo = true;
+                undoStack.Push(redoStack.Pop()); // 將重作堆疊最上面的紀錄移出，再堆到回復堆疊
+                MemoryStream lastSavedState = undoStack.Peek(); // 將回復堆疊最上面一筆紀錄顯示
+                LoadFromMemory(lastSavedState);
+                UpdateListBox();
+                isUndoRedo = false;
+            }
+        }
 
         private void rtbText_TextChanged(object sender, EventArgs e)
         {
@@ -221,6 +216,8 @@ namespace NotePad
                 listUndo.Items.Add(item);
             }
         }
+
+        // 初始化字體下拉選單
         private void InitializeFontComboBox()
         {
             // 將所有系統字體名稱添加到字體選擇框中
@@ -257,11 +254,13 @@ namespace NotePad
             comboBoxStyle.SelectedIndex = 0;
         }
 
-    
-        // 這個方法在 comboBox 的選項變更時觸發
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // 檢查當前選擇的文字是否有字型，如果有，則進行後續處理
+            // 保存當前選擇的文字起始位置和長度
+            selectionStart = rtbText.SelectionStart;
+            selectionLength = rtbText.SelectionLength;
+
+            // 確保當前選擇的文字具有字型
             if (rtbText.SelectionFont != null)
             {
                 // 從下拉選單中獲取選擇的字型、大小和樣式
@@ -298,20 +297,30 @@ namespace NotePad
                     rtbText.SelectionFont = newFont;
                 }
             }
+
+            // 恢復選擇狀態
+            rtbText.Focus();
+            rtbText.Select(selectionStart, selectionLength);
         }
-        private void btnRedo_Click(object sender, EventArgs e)
+
+        // 將文字編輯狀態保存到回復堆疊
+        private void SaveCurrentStateToStack()
         {
-            if (redoStack.Count > 0)
-            {
-                isUndoRedo = true;
-                undoStack.Push(redoStack.Pop()); // 將重作堆疊最上面的紀錄移出，再堆到回復堆疊
-                MemoryStream lastSavedState = undoStack.Peek(); // 將回復堆疊最上面一筆紀錄顯示
-                LoadFromMemory(lastSavedState);
-                UpdateListBox();
-                isUndoRedo = false;
-            }
+            // 創建一個新的 MemoryStream 來保存文字編輯狀態
+            MemoryStream memoryStream = new MemoryStream();
+            // 將 RichTextBox 的內容保存到 memoryStream
+            rtbText.SaveFile(memoryStream, RichTextBoxStreamType.RichText);
+            // 將 memoryStream 放入回復堆疊
+            undoStack.Push(memoryStream);
         }
 
-
+        // 將文字狀態從記憶體中顯示到 RichTextBox
+        private void LoadFromMemory(MemoryStream memoryStream)
+        {
+            // 將 memoryStream 的指標重置到開始位置
+            memoryStream.Seek(0, SeekOrigin.Begin);
+            // 將 memoryStream 的內容放到到 RichTextBox
+            rtbText.LoadFile(memoryStream, RichTextBoxStreamType.RichText);
+        }
     }
 }
